@@ -14,7 +14,7 @@
     <name>School of Music</name>
     <description>School of Music for Final Year Project</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
     </properties>
     <dependencies>
         <dependency>
