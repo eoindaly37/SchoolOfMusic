@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface StudentService {
     List<Student> all();
-    Student single(int id);
+    Student single(long id);
     Student save(String name);
-    int deleteStudentUsingId(int id);
+    long deleteStudentUsingId(long id);
 }

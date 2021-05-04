@@ -19,7 +19,7 @@ public class InstrumentServiceImpl implements InstrumentService{
     }
 
     @Override
-    public Instrument single(int id) {
+    public Instrument single(Long id) {
         return instrumentRepository.findById(id).orElse(null);
     }
 
@@ -30,7 +30,7 @@ public class InstrumentServiceImpl implements InstrumentService{
     }
 
     @Override
-    public int deleteInstrumentUsingId(int id) {
+    public Long deleteInstrumentUsingId(Long id) {
         return instrumentRepository.deleteInstrumentById(id);
     }
 }

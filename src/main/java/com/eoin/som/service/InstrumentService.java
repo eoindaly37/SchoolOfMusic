@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface InstrumentService {
     List<Instrument> all();
-    Instrument single(int id);
+    Instrument single(Long id);
     Instrument save(String name);
-    int deleteInstrumentUsingId(int id);
+    Long deleteInstrumentUsingId(Long id);
 }

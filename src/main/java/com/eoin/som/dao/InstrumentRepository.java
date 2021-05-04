@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;
 
-public interface InstrumentRepository extends JpaRepository<Instrument, Integer> {
+public interface InstrumentRepository extends JpaRepository<Instrument, Long> {
     @Transactional
-    int deleteInstrumentById(int id);
+    Long deleteInstrumentById(Long id);
 }

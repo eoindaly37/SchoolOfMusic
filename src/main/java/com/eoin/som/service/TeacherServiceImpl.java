@@ -19,7 +19,7 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
-    public Teacher single(int id) {
+    public Teacher single(Long id) {
         return teacherRepository.findById(id).orElse(null);
     }
 
@@ -30,7 +30,7 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
-    public int deleteTeacherUsingId(int id) {
+    public Long deleteTeacherUsingId(Long id) {
         return teacherRepository.deleteTeacherById(id);
     }
 }
