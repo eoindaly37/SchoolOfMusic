@@ -1,6 +1,8 @@
 package com.eoin.som.service;
 
+import com.eoin.som.converter.StudentConverter;
 import com.eoin.som.dao.StudentRepository;
+import com.eoin.som.dto.StudentDTO;
 import com.eoin.som.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,21 +13,27 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService{
     @Autowired
     StudentRepository studentRepository;
+    @Autowired
+    StudentConverter studentConverter;
+
 
     @Override
-    public List<Student> all() {
-        return studentRepository.findAll();
+    public List<StudentDTO> all() {
+        List<Student> students = studentRepository.findAll();
+        return studentConverter.entityToDTO(students);
     }
 
     @Override
-    public Student single(long id) {
-        return studentRepository.findById(id).orElse(null);
+    public StudentDTO single(long id) {
+        Student student = studentRepository.findById(id).orElse(null);
+        return  studentConverter.entityToDTO(student);
     }
 
     @Override
-    public Student save(String name) {
-        Student student = new Student(name);
-        return studentRepository.save(student);
+    public StudentDTO save(StudentDTO dto) {
+        Student student = studentConverter.dtoToEntity(dto);
+        student = studentRepository.save(student);
+        return studentConverter.entityToDTO(student);
     }
 
     @Override

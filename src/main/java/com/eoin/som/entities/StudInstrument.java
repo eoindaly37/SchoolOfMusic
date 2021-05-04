@@ -17,12 +17,10 @@ public class StudInstrument {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(nullable = false)
     private Student student;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(nullable = false)
     private Instrument instrument;

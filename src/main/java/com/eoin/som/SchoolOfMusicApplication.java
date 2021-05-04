@@ -1,6 +1,7 @@
 package com.eoin.som;
 
 import com.eoin.som.dao.StudInstRepository;
+import com.eoin.som.dto.StudentDTO;
 import com.eoin.som.entities.*;
 import com.eoin.som.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,9 @@ public class SchoolOfMusicApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Instrument accordian = instrumentService.save("Accordion");
         Teacher padraig = teacherService.save("Padraig Buckley");
-        Student eoin  = studentService.save("Eoin Daly");
-        StudInstrument eoinsacc = studInstService.save(eoin, accordian, 7);
+        StudentDTO eoindto  = new StudentDTO("Eoin Daly");
+        StudentDTO eoin  = studentService.save(eoindto);
+        //StudInstrument eoinsacc = studInstService.save(eoin, accordian, 7);
         TeachInstrument padraigsacc = teachInstService.save(padraig, accordian, 20);
 
     }

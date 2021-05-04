@@ -1,12 +1,12 @@
 package com.eoin.som.service;
 
-import com.eoin.som.entities.Student;
+import com.eoin.som.dto.StudentDTO;
 
 import java.util.List;
 
 public interface StudentService {
-    List<Student> all();
-    Student single(long id);
-    Student save(String name);
+    List<StudentDTO> all();
+    StudentDTO single(long id);
+    StudentDTO save(StudentDTO dto);
     long deleteStudentUsingId(long id);
 }
