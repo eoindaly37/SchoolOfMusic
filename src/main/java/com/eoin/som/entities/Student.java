@@ -22,7 +22,6 @@ public class Student {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<StudInstrument> instruments = new ArrayList<>();
 

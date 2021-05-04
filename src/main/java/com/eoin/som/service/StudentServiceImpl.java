@@ -24,7 +24,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public StudentDTO single(long id) {
+    public StudentDTO single(Long id) {
         Student student = studentRepository.findById(id).orElse(null);
         return  studentConverter.entityToDTO(student);
     }
@@ -37,7 +37,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public long deleteStudentUsingId(long id) {
+    public Long deleteStudentUsingId(Long id) {
         return studentRepository.deleteStudentById(id);
     }
 }

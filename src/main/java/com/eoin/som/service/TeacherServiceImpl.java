@@ -1,6 +1,8 @@
 package com.eoin.som.service;
 
+import com.eoin.som.converter.TeacherConverter;
 import com.eoin.som.dao.TeacherRepository;
+import com.eoin.som.dto.TeacherDTO;
 import com.eoin.som.entities.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,26 +13,31 @@ import java.util.List;
 public class TeacherServiceImpl implements TeacherService{
     @Autowired
     TeacherRepository teacherRepository;
-
+    @Autowired
+    TeacherConverter teacherConverter;
 
     @Override
-    public List<Teacher> all() {
-        return teacherRepository.findAll();
+    public List<TeacherDTO> all() {
+        List<Teacher> teachers = teacherRepository.findAll();
+        return teacherConverter.entityToDTO(teachers);
     }
 
     @Override
-    public Teacher single(Long id) {
-        return teacherRepository.findById(id).orElse(null);
+    public TeacherDTO single(Long id) {
+        Teacher teacher = teacherRepository.findById(id).orElse(null);
+        return  teacherConverter.entityToDTO(teacher);
     }
 
     @Override
-    public Teacher save(String name) {
-        Teacher teacher = new Teacher(name);
-        return teacherRepository.save(teacher);
+    public TeacherDTO save(TeacherDTO dto) {
+        Teacher teacher = teacherConverter.dtoToEntity(dto);
+        teacher = teacherRepository.save(teacher);
+        return teacherConverter.entityToDTO(teacher);
     }
 
     @Override
     public Long deleteTeacherUsingId(Long id) {
         return teacherRepository.deleteTeacherById(id);
     }
+
 }

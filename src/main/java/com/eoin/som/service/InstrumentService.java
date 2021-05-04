@@ -1,13 +1,12 @@
 package com.eoin.som.service;
 
-import com.eoin.som.entities.Instrument;
-import com.eoin.som.entities.Student;
+import com.eoin.som.dto.InstrumentDTO;
 
 import java.util.List;
 
 public interface InstrumentService {
-    List<Instrument> all();
-    Instrument single(Long id);
-    Instrument save(String name);
+    List<InstrumentDTO> all();
+    InstrumentDTO single(Long id);
+    InstrumentDTO save(InstrumentDTO dto);
     Long deleteInstrumentUsingId(Long id);
 }

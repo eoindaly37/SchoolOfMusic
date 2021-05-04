@@ -22,11 +22,9 @@ public class Instrument {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "instrument", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<StudInstrument> students = new ArrayList<>();
 
-    @JsonIgnore
     @OneToMany(mappedBy = "instrument", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<TeachInstrument> teachers = new ArrayList<>();
 
