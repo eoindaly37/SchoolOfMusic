@@ -22,7 +22,7 @@ public class Student {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "student")
     private List<StudInstrument> instruments = new ArrayList<>();
 
     public Student(String name){

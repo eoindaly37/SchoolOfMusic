@@ -18,11 +18,11 @@ public class StudInstrument {
     private long id;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Student student;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Instrument instrument;
 
     private int grade;

@@ -22,10 +22,10 @@ public class Instrument {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "instrument", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "instrument")
     private List<StudInstrument> students = new ArrayList<>();
 
-    @OneToMany(mappedBy = "instrument", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "instrument")
     private List<TeachInstrument> teachers = new ArrayList<>();
 
     public Instrument(String name){

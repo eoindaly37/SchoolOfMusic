@@ -1,9 +1,11 @@
 package com.eoin.som.service;
 
+import com.eoin.som.converter.TeachInstConverter;
 import com.eoin.som.dao.TeachInstRepository;
-import com.eoin.som.entities.Instrument;
+import com.eoin.som.dto.InstrumentDTO;
+import com.eoin.som.dto.TeachInstDTO;
+import com.eoin.som.dto.TeacherDTO;
 import com.eoin.som.entities.TeachInstrument;
-import com.eoin.som.entities.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,25 +15,37 @@ import java.util.List;
 public class TeachInstServiceImpl implements TeachInstService{
     @Autowired
     TeachInstRepository teachInstRepository;
+    @Autowired
+    TeachInstConverter teachInstConverter;
+    @Autowired
+    InstrumentService instrumentService;
+    @Autowired
+    TeacherService teacherService;
 
     @Override
-    public List<TeachInstrument> all() {
-        return teachInstRepository.findAll();
+    public List<TeachInstDTO> all() {
+        List<TeachInstrument> TeachInstruments = teachInstRepository.findAll();
+        return  teachInstConverter.entityToDTO(TeachInstruments);
     }
 
     @Override
-    public TeachInstrument single(long id) {
-        return teachInstRepository.findById(id).orElse(null);
+    public TeachInstDTO single(Long id) {
+        TeachInstrument TeachInstrument = teachInstRepository.findById(id).orElse(null);
+        return teachInstConverter.entityToDTO(TeachInstrument);
     }
 
     @Override
-    public TeachInstrument save(Teacher teacher, Instrument instrument, int grade) {
-        TeachInstrument teachInstrument = new TeachInstrument(teacher, instrument, grade);
-        return teachInstRepository.save(teachInstrument);
+    public TeachInstDTO save(TeachInstDTO TeachInstDTO) {
+        TeacherDTO TeacherDTO = teacherService.single((TeachInstDTO.getTeacher().getId()));
+        InstrumentDTO instrumentDTO = instrumentService.single(TeachInstDTO.getInstrument().getId());
+        TeachInstDTO newTeachInstDTO = new TeachInstDTO(TeacherDTO, instrumentDTO, TeachInstDTO.getGrade());
+        TeachInstrument TeachInstrument = teachInstConverter.dtoToEntity(newTeachInstDTO);
+        TeachInstrument = teachInstRepository.save(TeachInstrument);
+        return teachInstConverter.entityToDTO(TeachInstrument);
     }
 
     @Override
-    public long deleteTeachInstUsingId(long id) {
-        return deleteTeachInstUsingId(id);
+    public Long deleteTeachInstUsingId(Long id) {
+        return teachInstRepository.deleteTeachInstrumentById(id);
     }
 }

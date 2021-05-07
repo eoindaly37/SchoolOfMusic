@@ -18,12 +18,12 @@ public class TeachInstrument {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Teacher teacher;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Instrument instrument;
 
     private int grade;
